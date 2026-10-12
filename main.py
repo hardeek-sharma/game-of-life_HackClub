@@ -2,7 +2,6 @@ import random
 import time
 from time import sleep
 
-
 Dead_num = 0
 Dead_sym = "`"
 
@@ -68,7 +67,7 @@ def next_board_state(init_board):
         for j in range(width):
             live_neighbors = 0
 
-            if i == 0 and j == 0: # Top Left
+            if i == 0 and j == 0:  # Top Left
                 if init_board[i][j + 1] == Alive_num:  # E
                     live_neighbors += 1
 
@@ -77,7 +76,7 @@ def next_board_state(init_board):
 
                 if init_board[i + 1][j] == Alive_num:  # S
                     live_neighbors += 1
-            elif i == 0 and j != 0 and j != width-1: # Top
+            elif i == 0 and j != 0 and j != width - 1:  # Top
                 if init_board[i][j + 1] == Alive_num:  # E
                     live_neighbors += 1
 
@@ -92,7 +91,7 @@ def next_board_state(init_board):
 
                 if init_board[i][j - 1] == Alive_num:  # W
                     live_neighbors += 1
-            elif i == 0 and j == width-1: # Top Right
+            elif i == 0 and j == width - 1:  # Top Right
                 if init_board[i + 1][j] == Alive_num:  # S
                     live_neighbors += 1
 
@@ -101,7 +100,7 @@ def next_board_state(init_board):
 
                 if init_board[i][j - 1] == Alive_num:  # W
                     live_neighbors += 1
-            elif i != 0 and i != height-1 and j == 0: # Left
+            elif i != 0 and i != height - 1 and j == 0:  # Left
                 if init_board[i - 1][j] == Alive_num:  # N
                     live_neighbors += 1
 
@@ -116,55 +115,7 @@ def next_board_state(init_board):
 
                 if init_board[i + 1][j] == Alive_num:  # S
                     live_neighbors += 1
-            elif i != 0 and i != height-1 and j != 0 and j != width-1: # Center
-                if init_board[i-1][j-1] == Alive_num: # NW
-                    live_neighbors += 1
-
-                if init_board[i-1][j] == Alive_num: # N
-                    live_neighbors += 1
-
-                if init_board[i-1][j+1] == Alive_num: # NE
-                    live_neighbors += 1
-
-                if init_board[i][j+1] == Alive_num: # E
-                    live_neighbors += 1
-
-                if init_board[i+1][j+1] == Alive_num: # SE
-                    live_neighbors += 1
-
-                if init_board[i+1][j] == Alive_num: # S
-                    live_neighbors += 1
-
-                if init_board[i+1][j-1] == Alive_num: # SW
-                    live_neighbors += 1
-
-                if init_board[i][j-1] == Alive_num: # W
-                    live_neighbors += 1
-            elif i != 0 and i != height-1 and j == width-1: # Right
-                if init_board[i - 1][j - 1] == Alive_num:  # NW
-                    live_neighbors += 1
-
-                if init_board[i - 1][j] == Alive_num:  # N
-                    live_neighbors += 1
-
-                if init_board[i+1][j] == Alive_num: # S
-                    live_neighbors += 1
-
-                if init_board[i+1][j-1] == Alive_num: # SW
-                    live_neighbors += 1
-
-                if init_board[i][j-1] == Alive_num: # W
-                    live_neighbors += 1
-            elif i == height-1 and j == 0: # Bottom Left
-                if init_board[i - 1][j] == Alive_num:  # N
-                    live_neighbors += 1
-
-                if init_board[i - 1][j + 1] == Alive_num:  # NE
-                    live_neighbors += 1
-
-                if init_board[i][j + 1] == Alive_num:  # E
-                    live_neighbors += 1
-            elif i == height-1 and j != 0 and j != width-1: # Bottom
+            elif i != 0 and i != height - 1 and j != 0 and j != width - 1:  # Center
                 if init_board[i - 1][j - 1] == Alive_num:  # NW
                     live_neighbors += 1
 
@@ -177,16 +128,64 @@ def next_board_state(init_board):
                 if init_board[i][j + 1] == Alive_num:  # E
                     live_neighbors += 1
 
-                if init_board[i][j-1] == Alive_num: # W
+                if init_board[i + 1][j + 1] == Alive_num:  # SE
                     live_neighbors += 1
-            elif i == height-1 and j == width-1: # Bottom Right
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 1][j - 1] == Alive_num:  # SW
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+            elif i != 0 and i != height - 1 and j == width - 1:  # Right
                 if init_board[i - 1][j - 1] == Alive_num:  # NW
                     live_neighbors += 1
 
                 if init_board[i - 1][j] == Alive_num:  # N
                     live_neighbors += 1
 
-                if init_board[i][j-1] == Alive_num: # W
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 1][j - 1] == Alive_num:  # SW
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+            elif i == height - 1 and j == 0:  # Bottom Left
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 1][j + 1] == Alive_num:  # NE
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+            elif i == height - 1 and j != 0 and j != width - 1:  # Bottom
+                if init_board[i - 1][j - 1] == Alive_num:  # NW
+                    live_neighbors += 1
+
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 1][j + 1] == Alive_num:  # NE
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+            elif i == height - 1 and j == width - 1:  # Bottom Right
+                if init_board[i - 1][j - 1] == Alive_num:  # NW
+                    live_neighbors += 1
+
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
                     live_neighbors += 1
 
             if live_neighbors <= 1 and init_board[i][j] == Alive_num:
@@ -216,8 +215,43 @@ def run_forever(new_board):
             break
 
 
+def get_file_path():
+    while True:
+        try:
+            file_path = input("Enter an absolute file path: ")
+            with open(file_path, "r") as file:
+                contents = file.readline()
+        except FileNotFoundError:
+            print("\033[31m That file was not found (make sure to use an absolute path) \033[0m")
+        except PermissionError:
+            print("\033[31m File exists, but you do not have permission to access it \033[0m")
+        else:
+            break
+
+    return file_path
+
+
+def get_board_from_file():
+    file_path = get_file_path()
+
+    with open(file_path, "r") as file:
+        file_list = file.read().split("\n")
+
+        file_matrix = []
+        for row in file_list:
+            file_matrix.append(list(row))
+
+        height = len(file_matrix)
+        length = len(file_matrix[0])
+
+        for i in range(height):
+            for j in range(length):
+                file_matrix[i][j] = int(file_matrix[i][j])
+
+    return file_matrix
+
 
 if __name__ == '__main__':
-    board = random_state(10, 10)
-
+    board = random_state(3, 3)
+    board = get_board_from_file()
     run_forever(board)
