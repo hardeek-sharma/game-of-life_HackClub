@@ -1,5 +1,4 @@
 import random
-import time
 from time import sleep
 
 Dead_num = 0
@@ -251,7 +250,56 @@ def get_board_from_file():
     return file_matrix
 
 
-if __name__ == '__main__':
-    board = random_state(3, 3)
-    board = get_board_from_file()
+def get_board_mode():
+    print("(1. Random Soup 2. Import From File)")
+    while True:
+        try:
+            board_mode = int(input("How would you get a life: "))
+        except ValueError:
+            print("\033[31m Enter a NUMBER (1 or 2) \033[0m")
+        else:
+            if board_mode < 1 or board_mode > 2:
+                print("\033[31m Enter 1 or 2 \033[0m")
+            else:
+                return board_mode
+
+
+def get_width():
+    while True:
+        try:
+            width = int(input("How wide do you want your board to be: "))
+        except ValueError:
+            print("\033[31m Enter a NUMBER \033[0m")
+        else:
+            if width <= 1:
+                print("\033[31m Width cannot be less than 2 \033[0m")
+            else:
+                return width
+
+
+def get_height():
+    while True:
+        try:
+            height = int(input("How tall do you want your board to be: "))
+        except ValueError:
+            print("\033[31m Enter a NUMBER \033[0m")
+        else:
+            if height <= 1:
+                print("\033[31m Height cannot be less than 2 \033[0m")
+            else:
+                return height
+
+
+def run_life():
+    board = None
+    mode = get_board_mode()
+    if mode == 1:
+        board = random_state(get_width(), get_height())
+    elif mode == 2:
+        board = get_board_from_file()
+
     run_forever(board)
+
+
+if __name__ == '__main__':
+    run_life()
