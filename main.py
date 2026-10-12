@@ -1,15 +1,11 @@
 import random
-from enum import Enum
 
 
-class Dead(Enum):
-    num = 0
-    symbol = "`"
+Dead_num = 0
+Dead_sym = "`"
 
-
-class Alive(Enum):
-    num = 1
-    symbol = "X"
+Alive_num = 1
+Alive_sym = "X"
 
 
 def dead_state(width: int, height: int):
@@ -17,7 +13,7 @@ def dead_state(width: int, height: int):
     for i in range(height):
         row_holder = []
         for j in range(width):
-            row_holder.append(Dead.num)
+            row_holder.append(Dead_num)
         board_holder.append(row_holder)
     return board_holder
 
@@ -26,7 +22,7 @@ def random_state(width: int, height: int):
     board_holder = dead_state(width, height)
     for i in range(height):
         for j in range(width):
-            board_holder[i][j] = random.choice([Dead.num, Alive.num])
+            board_holder[i][j] = random.choice([Dead_num, Alive_num])
     return board_holder
 
 
@@ -40,20 +36,20 @@ def render(board_holder):
         for j in range(width):
             if j == 0:
                 print("| ", end="")
-                if board_holder[i][j] == Dead.num:
-                    print(Dead.symbol.value, end="  ")
+                if board_holder[i][j] == Dead_num:
+                    print(Dead_sym, end="  ")
                 else:
-                    print(Alive.symbol.value, end="  ")
+                    print(Alive_sym, end="  ")
             elif 0 < j < width - 1:
-                if board_holder[i][j] == Dead.num:
-                    print(Dead.symbol.value, end="  ")
+                if board_holder[i][j] == Dead_num:
+                    print(Dead_sym, end="  ")
                 else:
-                    print(Alive.symbol.value, end="  ")
+                    print(Alive_sym, end="  ")
             else:
-                if board_holder[i][j] == Dead.num:
-                    print(f"{Dead.symbol.value} |", end="")
+                if board_holder[i][j] == Dead_num:
+                    print(f"{Dead_sym} |", end="")
                 else:
-                    print(f"{Alive.symbol.value} |", end="")
+                    print(f"{Alive_sym} |", end="")
                 print(" ", end="")
         print()
 
@@ -64,31 +60,153 @@ def next_board_state(init_board):
     height = len(init_board)
     width = len(init_board[0])
 
+    next_board = []
     for i in range(height):
+        next_row = []
         for j in range(width):
+            live_neighbors = 0
+
             if i == 0 and j == 0: # Top Left
-                pass
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i + 1][j + 1] == Alive_num:  # SE
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
             elif i == 0 and j != 0 and j != width-1: # Top
-                pass
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i + 1][j + 1] == Alive_num:  # SE
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 1][j - 1] == Alive_num:  # SW
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
             elif i == 0 and j == width-1: # Top Right
-                pass
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 1][j - 1] == Alive_num:  # SW
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
             elif i != 0 and i != height-1 and j == 0: # Left
-                pass
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 1][j + 1] == Alive_num:  # NE
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i + 1][j + 1] == Alive_num:  # SE
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
             elif i != 0 and i != height-1 and j != 0 and j != width-1: # Center
-                pass
+                if init_board[i-1][j-1] == Alive_num: # NW
+                    live_neighbors += 1
+
+                if init_board[i-1][j] == Alive_num: # N
+                    live_neighbors += 1
+
+                if init_board[i-1][j+1] == Alive_num: # NE
+                    live_neighbors += 1
+
+                if init_board[i][j+1] == Alive_num: # E
+                    live_neighbors += 1
+
+                if init_board[i+1][j+1] == Alive_num: # SE
+                    live_neighbors += 1
+
+                if init_board[i+1][j] == Alive_num: # S
+                    live_neighbors += 1
+
+                if init_board[i+1][j-1] == Alive_num: # SW
+                    live_neighbors += 1
+
+                if init_board[i][j-1] == Alive_num: # W
+                    live_neighbors += 1
             elif i != 0 and i != height-1 and j == width-1: # Right
-                pass
+                if init_board[i - 1][j - 1] == Alive_num:  # NW
+                    live_neighbors += 1
+
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i+1][j] == Alive_num: # S
+                    live_neighbors += 1
+
+                if init_board[i+1][j-1] == Alive_num: # SW
+                    live_neighbors += 1
+
+                if init_board[i][j-1] == Alive_num: # W
+                    live_neighbors += 1
             elif i == height-1 and j == 0: # Bottom Left
-                pass
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 1][j + 1] == Alive_num:  # NE
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
             elif i == height-1 and j != 0 and j != width-1: # Bottom
-                pass
+                if init_board[i - 1][j - 1] == Alive_num:  # NW
+                    live_neighbors += 1
+
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 1][j + 1] == Alive_num:  # NE
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j-1] == Alive_num: # W
+                    live_neighbors += 1
             elif i == height-1 and j == width-1: # Bottom Right
-                pass
+                if init_board[i - 1][j - 1] == Alive_num:  # NW
+                    live_neighbors += 1
 
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
 
+                if init_board[i][j-1] == Alive_num: # W
+                    live_neighbors += 1
 
+            if live_neighbors <= 1 and init_board[i][j] == Alive_num:
+                next_row.append(Dead_num)
+            elif 2 <= live_neighbors <= 3 and init_board[i][j] == Alive_num:
+                next_row.append(Alive_num)
+            elif live_neighbors > 3 and init_board[i][j] == Alive_num:
+                next_row.append(Dead_num)
+            elif live_neighbors == 3 and init_board[i][j] == Dead_num:
+                next_row.append(Alive_num)
+            else:
+                next_row.append(Dead_num)
+
+        next_board.append(next_row)
+    return next_board
 
 if __name__ == '__main__':
-    board = random_state(60, 13)
+    board = random_state(30, 3)
+
+
+    render(board)
+
+    board = next_board_state(board)
 
     render(board)
