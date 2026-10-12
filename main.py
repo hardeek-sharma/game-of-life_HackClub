@@ -1,4 +1,6 @@
 import random
+import time
+from time import sleep
 
 
 Dead_num = 0
@@ -201,12 +203,21 @@ def next_board_state(init_board):
         next_board.append(next_row)
     return next_board
 
+
+def run_forever(new_board):
+    while True:
+        render(new_board)
+        old_board = new_board
+        new_board = next_board_state(new_board)
+        sleep(0.5)
+
+        if new_board == old_board:
+            render(new_board)
+            break
+
+
+
 if __name__ == '__main__':
-    board = random_state(30, 3)
+    board = random_state(10, 10)
 
-
-    render(board)
-
-    board = next_board_state(board)
-
-    render(board)
+    run_forever(board)
