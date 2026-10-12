@@ -60,6 +60,35 @@ def render(board_holder):
     print("-" * (width * 3 + 2))
 
 
-board = random_state(60, 13)
+def next_board_state(init_board):
+    height = len(init_board)
+    width = len(init_board[0])
 
-render(board)
+    for i in range(height):
+        for j in range(width):
+            if i == 0 and j == 0: # Top Left
+                pass
+            elif i == 0 and j != 0 and j != width-1: # Top
+                pass
+            elif i == 0 and j == width-1: # Top Right
+                pass
+            elif i != 0 and i != height-1 and j == 0: # Left
+                pass
+            elif i != 0 and i != height-1 and j != 0 and j != width-1: # Center
+                pass
+            elif i != 0 and i != height-1 and j == width-1: # Right
+                pass
+            elif i == height-1 and j == 0: # Bottom Left
+                pass
+            elif i == height-1 and j != 0 and j != width-1: # Bottom
+                pass
+            elif i == height-1 and j == width-1: # Bottom Right
+                pass
+
+
+
+
+if __name__ == '__main__':
+    board = random_state(60, 13)
+
+    render(board)
