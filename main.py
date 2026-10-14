@@ -202,11 +202,461 @@ def next_board_state(init_board):
     return next_board
 
 
+def next_board_state_von_neumann(init_board):
+    height = len(init_board)
+    width = len(init_board[0])
+
+    next_board = []
+    for i in range(height):
+        next_row = []
+        for j in range(width):
+            live_neighbors = 0
+
+            if i == 0 and j == 0:  # Top, Left
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+            elif i == 0 and j == 1:  # Top, Almost Left
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+            elif i == 0 and 1 < j < width - 2:  # Top
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == 0 and j == width - 2:  # Top, Almost Right
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == 0 and j == width - 1:  # Top, Right
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == 1 and j == 0:  # Almost Top, Left
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+            elif i == 1 and j == 1:  # Almost Top, Almost Left
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+            elif i == 1 and 1 < j < width - 2:  # Almost Top
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == 1 and j == width - 2:  # Almost Top, Almost Right
+
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == 1 and j == width - 1:  # Almost Top, Right
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == 2 and j == 0:  # Middle, Left
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+            elif i == 2 and j == 1:  # Middle, Almost Left
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+            elif 1 < i < height - 2 and 1 < j < width - 2:  # Middle, Middle
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == 2 and j == width - 2:  # Middle, Almost Right
+                if init_board[i][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i][j] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i][j] == Alive_num:  # S+
+                    live_neighbors += 1
+
+                if init_board[i][j] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == 2 and j == width - 1:  # Middle, Right
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i + 2][j] == Alive_num:  # S+
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == height - 2 and j == 0:  # Almost Bottom, Left
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+            elif i == height - 2 and j == 1:  # Almost Bottom, Almost Left
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+            elif i == height - 2 and 1 < j < width - 2:  # Almost Bottom
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == height - 2 and j == width - 2:  # Almost Bottom, Almost Right
+
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == height - 2 and j == width - 1:  # Almost Bottom, Right
+
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i + 1][j] == Alive_num:  # S
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == height - 1 and j == 0:  # Bottom, Left
+                if init_board[i - 2][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+            elif i == height - 1 and j == 1:  # Bottom, Almost Left
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i][j] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i][j] == Alive_num:  # W
+                    live_neighbors += 1
+            elif i == height - 1 and 1 > j > width - 2:  # Bottom, Middle
+
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j + 2] == Alive_num:  # E+
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == height - 1 and j == width - 2:  # Bottom, Almost Right
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i][j + 1] == Alive_num:  # E
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+            elif i == height - 1 and j == width - 1:  # Bottom, Right
+                if init_board[i - 1][j] == Alive_num:  # N
+                    live_neighbors += 1
+
+                if init_board[i - 2][j] == Alive_num:  # N+
+                    live_neighbors += 1
+
+                if init_board[i][j - 1] == Alive_num:  # W
+                    live_neighbors += 1
+
+                if init_board[i][j - 2] == Alive_num:  # W+
+                    live_neighbors += 1
+
+            if live_neighbors <= 1 and init_board[i][j] == Alive_num:
+                next_row.append(Dead_num)
+            elif 2 <= live_neighbors <= 3 and init_board[i][j] == Alive_num:
+                next_row.append(Alive_num)
+            elif live_neighbors > 3 and init_board[i][j] == Alive_num:
+                next_row.append(Dead_num)
+            elif live_neighbors == 3 and init_board[i][j] == Dead_num:
+                next_row.append(Alive_num)
+            else:
+                next_row.append(Dead_num)
+
+        next_board.append(next_row)
+    return next_board
+
+
 def run_forever(new_board):
     while True:
         render(new_board)
         old_board = new_board
-        new_board = next_board_state(new_board)
+        new_board = next_board_state_von_neumann(new_board)
         sleep(0.5)
 
         if new_board == old_board:
@@ -271,8 +721,8 @@ def get_width():
         except ValueError:
             print("\033[31m Enter a NUMBER \033[0m")
         else:
-            if width <= 1:
-                print("\033[31m Width cannot be less than 2 \033[0m")
+            if width < 3:
+                print("\033[31m Width cannot be less than 3 \033[0m")
             else:
                 return width
 
@@ -284,8 +734,8 @@ def get_height():
         except ValueError:
             print("\033[31m Enter a NUMBER \033[0m")
         else:
-            if height <= 1:
-                print("\033[31m Height cannot be less than 2 \033[0m")
+            if height < 3:
+                print("\033[31m Height cannot be less than 3 \033[0m")
             else:
                 return height
 
