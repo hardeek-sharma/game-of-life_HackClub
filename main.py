@@ -652,11 +652,14 @@ def next_board_state_von_neumann(init_board):
     return next_board
 
 
-def run_forever(new_board):
+def run_forever(new_board, mode):
     while True:
         render(new_board)
         old_board = new_board
-        new_board = next_board_state_von_neumann(new_board)
+        if mode == 1:
+            new_board = next_board_state(new_board)
+        elif mode == 2:
+            new_board = next_board_state_von_neumann(new_board)
         sleep(0.5)
 
         if new_board == old_board:
@@ -704,51 +707,79 @@ def get_board_mode():
     print("(1. Random Soup 2. Import From File)")
     while True:
         try:
-            board_mode = int(input("How would you get a life: "))
+            mode = int(input("How would you get a life: "))
         except ValueError:
             print("\033[31m Enter a NUMBER (1 or 2) \033[0m")
         else:
-            if board_mode < 1 or board_mode > 2:
+            if mode < 1 or mode > 2:
                 print("\033[31m Enter 1 or 2 \033[0m")
             else:
-                return board_mode
+                return mode
 
 
-def get_width():
+def get_hood_mode():
+    print("(1. Moore 2. Von Neumann)")
+    while True:
+        try:
+            mode = int(input("What type of neighborhood would you like: "))
+        except ValueError:
+            print("\033[31m Enter a NUMBER (1 or 2) \033[0m")
+        else:
+            if mode < 1 or mode > 2:
+                print("\033[31m Enter 1 or 2 \033[0m")
+            else:
+                return mode
+
+
+def get_width(mode):
     while True:
         try:
             width = int(input("How wide do you want your board to be: "))
         except ValueError:
             print("\033[31m Enter a NUMBER \033[0m")
         else:
-            if width < 3:
-                print("\033[31m Width cannot be less than 3 \033[0m")
-            else:
-                return width
+            if mode == 1:
+                if width < 3:
+                    print("\033[31m Width cannot be less than 3 \033[0m")
+                else:
+                    return width
+            elif mode == 2:
+                if width < 5:
+                    print("\033[31m Width cannot be less than 5 \033[0m")
+                else:
+                    return width
 
 
-def get_height():
+def get_height(mode):
     while True:
         try:
             height = int(input("How tall do you want your board to be: "))
         except ValueError:
             print("\033[31m Enter a NUMBER \033[0m")
         else:
-            if height < 3:
-                print("\033[31m Height cannot be less than 3 \033[0m")
-            else:
-                return height
+            if mode == 1:
+                if height < 3:
+                    print("\033[31m Height cannot be less than 3 \033[0m")
+                else:
+                    return height
+            elif mode == 2:
+                if height < 5:
+                    print("\033[31m Height cannot be less than 5 \033[0m")
+                else:
+                    return height
 
 
 def run_life():
     board = None
-    mode = get_board_mode()
-    if mode == 1:
-        board = random_state(get_width(), get_height())
-    elif mode == 2:
+    board_mode = int(get_board_mode())
+    hood_mode = int(get_hood_mode())
+
+    if board_mode == 1:
+        board = random_state(get_width(hood_mode), get_height(hood_mode))
+    elif board_mode == 2:
         board = get_board_from_file()
 
-    run_forever(board)
+    run_forever(board, hood_mode)
 
 
 if __name__ == '__main__':
